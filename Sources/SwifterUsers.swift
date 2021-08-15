@@ -329,6 +329,7 @@ public extension Swifter {
     */
     func showUser(_ userTag: UserTag,
                   includeEntities: Bool? = nil,
+                  tweetMode: TweetMode = .default,
                   success: SuccessHandler? = nil,
                   failure: FailureHandler? = nil) {
         let path = "users/show.json"
@@ -336,6 +337,7 @@ public extension Swifter {
         var parameters = [String: Any]()
         parameters[userTag.key] = userTag.value
         parameters["include_entities"] ??= includeEntities
+        parameters["tweet_mode"] = tweetMode.stringValue
 
 		self.getJSON(path: path, baseURL: .api, parameters: parameters, success: { json, _ in
 			success?(json)
